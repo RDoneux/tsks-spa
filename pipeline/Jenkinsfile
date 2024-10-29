@@ -3,10 +3,11 @@ pipeline {
     agent any
 
     environment {
-        PULUMI_STACK_BUCKET = "tplt-web-spa-pulumi?region=eu-west-2"
+        // PULUMI_STACK_BUCKET = "tplt-web-spa-pulumi?region=eu-west-2"
 
         // can use "pulumi stack -Q" to find this
-        PULUMI_STACK = "organization/tplt-web-spa/dev"
+        // PULUMI_STACK = "organization/tplt-web-spa/dev"
+        DOCKER_IMAGE = 'rdoneux/templates'
     }
 
     stages {
@@ -87,42 +88,60 @@ pipeline {
                 }
             }
 
-            stage ("Deploy") {
-
-                when {
-                    anyOf {
-                        branch 'master';
-                        branch 'development'
-                    }
-                }
-
-                steps {
-                    sh "curl -fsSL https://get.pulumi.com | sh"
-                    sh "$HOME/.pulumi/bin/pulumi version"
-
-                    withCredentials([aws(credentialsId: "AWS_CREDENTIALS")]){
-                        withEnv(["PATH+PULUMI=$HOME/.pulumi/bin"]) {
-                            sh "pulumi login 's3://${PULUMI_STACK_BUCKET}'"
-                            dir("iac") {
-                                sh "npm i"
-                                sh "pulumi stack select ${PULUMI_STACK}"
-                                withCredentials([string(credentialsId: 'PULUMI_ENCRYPTION_KEY', variable: "PULUMI_CONFIG_PASSPHRASE")]) {
-                                    sh "pulumi up --yes"
-                                }
-                            }  
-                        }
-
-                    }
-                }
-                post {
-                    success {
-                        echo "Deploy success"
-                    }
-                    failure {
-                        echo "Deploy failure"
-                    }
+        stage ("Publish to Docker Hub") {
+            when {
+                branch 'master' // Only run this stage if the branch is 'master'
+            }
+            steps {
+                sh "docker build -t $DOCKER_IMAGE:tsks-spa ." 
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                    sh 'docker push $DOCKER_IMAGE:tsks-spa'
                 }
             }
+            post {
+               always {
+                    sh 'docker rmi $DOCKER_IMAGE:tsks-spa || true'
+               } 
+            }
+        }
+
+            // stage ("Deploy") {
+
+            //     when {
+            //         anyOf {
+            //             branch 'master';
+            //             branch 'development'
+            //         }
+            //     }
+
+            //     steps {
+            //         sh "curl -fsSL https://get.pulumi.com | sh"
+            //         sh "$HOME/.pulumi/bin/pulumi version"
+
+            //         withCredentials([aws(credentialsId: "AWS_CREDENTIALS")]){
+            //             withEnv(["PATH+PULUMI=$HOME/.pulumi/bin"]) {
+            //                 sh "pulumi login 's3://${PULUMI_STACK_BUCKET}'"
+            //                 dir("iac") {
+            //                     sh "npm i"
+            //                     sh "pulumi stack select ${PULUMI_STACK}"
+            //                     withCredentials([string(credentialsId: 'PULUMI_ENCRYPTION_KEY', variable: "PULUMI_CONFIG_PASSPHRASE")]) {
+            //                         sh "pulumi up --yes"
+            //                     }
+            //                 }  
+            //             }
+
+            //         }
+            //     }
+            //     post {
+            //         success {
+            //             echo "Deploy success"
+            //         }
+            //         failure {
+            //             echo "Deploy failure"
+            //         }
+            //     }
+            // }
         
     }
 
