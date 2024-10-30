@@ -7,7 +7,7 @@ pipeline {
 
         // can use "pulumi stack -Q" to find this
         // PULUMI_STACK = "organization/tplt-web-spa/dev"
-        DOCKER_IMAGE = 'rdoneux/templates'
+        DOCKER_IMAGE = 'rdoneux/tasks'
     }
 
     stages {
