@@ -21,7 +21,10 @@ export default function Boards() {
       <h1 className="text-6xl uppercase">Boards</h1>
       <ul className="mt-10 grid gap-5">
         {boards?.map((board: IBoard) => (
-          <li className="transition-all hover:bg-neutral-900 rounded px-2 py-1" key={board.id}>
+          <li
+            className="transition-all hover:bg-neutral-900 rounded px-2 py-1"
+            key={board.id}
+          >
             <NavLink
               to={`/board/${board.id}`}
               className="grid grid-cols-[auto_1fr_1fr_100px_250px] gap-8"

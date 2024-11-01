@@ -9,13 +9,12 @@ export default function Board() {
   const { boardId } = useParams();
 
   useEffect(() => {
-
     axiosInstance
       .get<IBoard>(`/boards/columns/${boardId}`)
       .then((response: AxiosResponse<IBoard>) => {
         setBoard(response.data);
       });
-  }, []);
+  }, [boardId]);
 
   return (
     <>
