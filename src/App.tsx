@@ -12,7 +12,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Toaster toastOptions={{style: {backgroundColor: '#d4d4d4'}}}/>
+      <Toaster toastOptions={{ style: { backgroundColor: '#d4d4d4' } }} />
     </BrowserRouter>
   );
 }
