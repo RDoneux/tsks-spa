@@ -52,7 +52,7 @@ export default function Login() {
   }
 
   return (
-    <div className="w-[40%] max-w-[500px] flex flex-col justify-center items-center gap-16">
+    <div className="flex flex-col justify-center items-center gap-16 w-[90%] md:w-[40%] md:max-w-[500px]">
       <img src="./logo.svg" className="w-[100px] h-[100px]" />
       <form className="grid grid-rows-[45px_45px_40px_20px_40px] gap-3 w-full">
         <label
