@@ -6,6 +6,8 @@ import { AxiosResponse } from 'axios';
 import Column from '../../components/Column';
 import IColumn from '../../interfaces/IColumn';
 import styles from './Board.module.css';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export default function Board() {
   const [board, setBoard] = useState<IBoard>();
@@ -26,7 +28,11 @@ export default function Board() {
         style={{ '--grid-size': board?.columns?.length } as React.CSSProperties}
         className={styles['dynamic-grid']}
       >
-        {board?.columns?.map((column: IColumn) => <Column id={column.id} />)}
+        <DndProvider backend={HTML5Backend}>
+          {board?.columns?.map((column: IColumn) => (
+            <Column key={column.id} id={column.id} />
+          ))}
+        </DndProvider>
       </div>
     </div>
   );
