@@ -1,8 +1,11 @@
+import { PropsWithChildren } from 'react';
+
 interface ModalProps {
   onConfirm: () => void;
   onCancel: () => void;
 
   title: string;
+  open: boolean;
   description?: string;
   confirmationButtonText?: string;
   cancelButtonText?: string;
@@ -11,19 +14,24 @@ interface ModalProps {
 export default function Modal({
   onConfirm,
   onCancel,
+  open,
   title,
   description,
   confirmationButtonText = "Yes, I'm sure",
-  cancelButtonText = 'No, close'
-}: ModalProps) {
+  cancelButtonText = 'No, close',
+  children
+}: PropsWithChildren<ModalProps>) {
   return (
     <div
       id="modal"
+      style={{ pointerEvents: open ? 'all' : 'none' }}
       className="fixed opacity-0 top-5 rounded-lg bg-neutral-600 p-8 shadow-2xl"
     >
       <h2 className="text-lg font-bold">{title}</h2>
 
       <p className="mt-2 text-sm text-neutral-100">{description}</p>
+
+      {children}
 
       <div className="mt-4 flex gap-2">
         <button

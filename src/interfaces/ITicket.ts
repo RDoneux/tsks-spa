@@ -1,3 +1,5 @@
+import IColumn from "./IColumn";
+
 export default interface ITicket {
   id: string;
   ticketName: string;
@@ -5,6 +7,7 @@ export default interface ITicket {
   priority: Priority;
   done: boolean;
   columnId: string;
+  column: IColumn;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -10,10 +10,13 @@ import { DndContext, DragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
 import ITicket from '../../interfaces/ITicket';
 import Ticket from '../../components/Ticket';
 import { moveTicket } from './services/Board.service';
+import AddTicketButton from '../../components/create-new-ticket/AddTicketButton';
+import CreateNewTicketModal from '../../components/create-new-ticket/CreateNewTicketModal';
 
 export default function Board() {
   const [board, setBoard] = useState<IBoard>();
   const [columns, setColumns] = useState<IColumn[]>([]);
+  const [modalOpen, setModalOpen] = useState<IColumn | null>(null);
 
   const { boardId } = useParams();
 
@@ -61,22 +64,36 @@ export default function Board() {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-5 h-full w-full">
-      <h1 className="text-6xl">{board?.boardName}</h1>
-      <div
-        style={{ '--grid-size': board?.columns?.length } as React.CSSProperties}
-        className={styles['dynamic-grid']}
-      >
-        <DndContext onDragEnd={handleDragEnd}>
-          {columns?.map((column: IColumn) => (
-            <Column key={column.id} column={column}>
-              {column.tickets?.map((ticket: ITicket) => (
-                <Ticket key={ticket.id} ticket={ticket} columnId={column.id} />
-              ))}
-            </Column>
-          ))}
-        </DndContext>
+    <>
+      <div className="flex flex-col gap-5 p-5 h-full w-full">
+        <h1 className="text-6xl">{board?.boardName}</h1>
+        <div
+          style={
+            { '--grid-size': board?.columns?.length } as React.CSSProperties
+          }
+          className={styles['dynamic-grid']}
+        >
+          <DndContext onDragEnd={handleDragEnd}>
+            {columns?.map((column: IColumn) => (
+              <Column key={column.id} column={column}>
+                {column.tickets?.map((ticket: ITicket) => (
+                  <Ticket
+                    key={ticket.id}
+                    ticket={ticket}
+                    columnId={column.id}
+                  />
+                ))}
+                <AddTicketButton onClick={() => setModalOpen(column)} />
+              </Column>
+            ))}
+          </DndContext>
+        </div>
       </div>
-    </div>
+      <CreateNewTicketModal
+        modalOpen={modalOpen}
+        triggerColumnRefresh={updateColumns}
+        onClose={() => setModalOpen(null)}
+      />
+    </>
   );
 }

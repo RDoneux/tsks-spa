@@ -85,6 +85,7 @@ export default function Boards() {
         </ul>
       </div>
       <Modal
+        open={modalOpen.length > 0}
         onConfirm={() => deleteBoard(modalOpen)}
         onCancel={() => setModalOpen('')}
         title="Are you sure?"
