@@ -1,4 +1,4 @@
-import IColumn from "./IColumn";
+import IColumn from './IColumn';
 
 export default interface ITicket {
   id: string;

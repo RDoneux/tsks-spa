@@ -2,129 +2,128 @@
 
 /* LEFT */
 @property --left-colour-red {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --left-colour-green {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --left-colour-blue {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+/* CENTER */
+@property --center-colour-red {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --center-colour-green {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --center-colour-blue {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+/* RIGHT */
+@property --right-colour-red {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --right-colour-green {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+@property --right-colour-blue {
+  syntax: '<number>';
+  initial-value: 212;
+  inherits: false;
+}
+
+.funky-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  color: #404040;
+
+  background-image: linear-gradient(
+    to right,
+    rgba(
+      var(--left-colour-red),
+      var(--left-colour-green),
+      var(--left-colour-blue)
+    ),
+    rgba(
+      var(--center-colour-red),
+      var(--center-colour-green),
+      var(--center-colour-blue)
+    ),
+    rgba(
+      var(--right-colour-red),
+      var(--right-colour-green),
+      var(--right-colour-blue)
+    )
+  );
+
+  &:hover {
+    animation:
+      fadeInEdges 1000ms forwards ease-out,
+      fadeInCenter 250ms forwards ease-out;
   }
-  
-  @property --left-colour-green {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
+}
+
+@keyframes fadeInEdges {
+  0% {
+    --left-colour-red: 212;
+    --left-colour-green: 212;
+    --left-colour-blue: 212;
+
+    --right-colour-red: 212;
+    --right-colour-green: 212;
+    --right-colour-blue: 212;
   }
-  
-  @property --left-colour-blue {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
+  100% {
+    --left-colour-red: 236;
+    --left-colour-green: 72;
+    --left-colour-blue: 153;
+
+    --right-colour-red: 234;
+    --right-colour-green: 179;
+    --right-colour-blue: 8;
   }
-  
-  /* CENTER */
-  @property --center-colour-red {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  @property --center-colour-green {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  @property --center-colour-blue {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  /* RIGHT */
-  @property --right-colour-red {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  @property --right-colour-green {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  @property --right-colour-blue {
-    syntax: '<number>';
-    initial-value: 212;
-    inherits: false;
-  }
-  
-  .funky-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
+}
+
+@keyframes fadeInCenter {
+  0% {
     color: #404040;
-  
-    background-image: linear-gradient(
-      to right,
-      rgba(
-        var(--left-colour-red),
-        var(--left-colour-green),
-        var(--left-colour-blue)
-      ),
-      rgba(
-        var(--center-colour-red),
-        var(--center-colour-green),
-        var(--center-colour-blue)
-      ),
-      rgba(
-        var(--right-colour-red),
-        var(--right-colour-green),
-        var(--right-colour-blue)
-      )
-    );
-  
-    &:hover {
-      animation:
-        fadeInEdges 1000ms forwards ease-out,
-        fadeInCenter 250ms forwards ease-out;
-    }
+
+    --center-colour-red: 212;
+    --center-colour-green: 212;
+    --center-colour-blue: 212;
   }
-  
-  @keyframes fadeInEdges {
-    0% {
-      --left-colour-red: 212;
-      --left-colour-green: 212;
-      --left-colour-blue: 212;
-  
-      --right-colour-red: 212;
-      --right-colour-green: 212;
-      --right-colour-blue: 212;
-    }
-    100% {
-      --left-colour-red: 236;
-      --left-colour-green: 72;
-      --left-colour-blue: 153;
-  
-      --right-colour-red: 234;
-      --right-colour-green: 179;
-      --right-colour-blue: 8;
-    }
+  100% {
+    color: rgba(253, 253, 253);
+
+    --center-colour-red: 239;
+    --center-colour-green: 68;
+    --center-colour-blue: 68;
   }
-  
-  @keyframes fadeInCenter {
-    0% {
-      color: #404040;
-  
-      --center-colour-red: 212;
-      --center-colour-green: 212;
-      --center-colour-blue: 212;
-    }
-    100% {
-      color: rgba(253, 253, 253);
-  
-      --center-colour-red: 239;
-      --center-colour-green: 68;
-      --center-colour-blue: 68;
-    }
-  }
-  
+}

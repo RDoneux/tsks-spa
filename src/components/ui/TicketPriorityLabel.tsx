@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Priority } from '../../interfaces/ITicket';
 
 interface TicketPriorityLabel {
@@ -13,13 +12,11 @@ const priorityMap: { [key: string]: string } = {
 };
 
 export default function TicketPriorityLabel({ priority }: TicketPriorityLabel) {
-  useEffect(() => {
-    console.log(JSON.stringify(priorityMap), priority, priorityMap[priority]);
-  }, []);
-
   return (
     <>
-      <div className={`${priorityMap[priority]} rounded w-fit px-2 py-1`}>{priority}</div>
+      <div className={`${priorityMap[priority]} rounded w-fit px-2 py-1`}>
+        {priority}
+      </div>
     </>
   );
 }

@@ -31,7 +31,6 @@ export default function Ticket({ ticket, columnId }: TicketProps) {
       <h4 className="text-xl text-bold">{ticket.ticketName}</h4>
       <p className="text-sm">{ticket.description}</p>
       <TicketPriorityLabel priority={ticket.priority} />
-
     </div>
   );
 }

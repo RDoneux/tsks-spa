@@ -90,7 +90,7 @@ export default function Login() {
           </span>
         </label>
 
-        <button type="submit" className='funky-button' onClick={submit}>
+        <button type="submit" className="funky-button" onClick={submit}>
           <span className="block rounded-sm text-md font-bold">Login</span>
         </button>
 
