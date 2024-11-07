@@ -4,7 +4,7 @@ import ITicket, { Priority } from '../../../interfaces/ITicket';
 export const ICreateTicketInitialState: Partial<ITicket> = {
   ticketName: '',
   description: '',
-  priority: 'Medium'
+  priority: 'MEDIUM'
 };
 
 const CreateTicketReducerType = {

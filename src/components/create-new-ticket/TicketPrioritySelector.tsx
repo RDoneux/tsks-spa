@@ -5,7 +5,7 @@ interface TicketPrioritySelector {
   valueSelected: (priority: Priority) => void;
 }
 
-const options: Priority[] = ['Low', 'Medium', 'High', 'Critical'];
+const options: Priority[] = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
 
 export default function TicketPrioritySelector({
   selectedValue = Priority.MEDIUM,
