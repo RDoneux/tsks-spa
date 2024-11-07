@@ -1,44 +1,45 @@
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import axiosInstance from '../services/axios-interceptor.service';
-import { AxiosResponse } from 'axios';
-import ITicket from '../interfaces/ITicket';
 import IColumn from '../interfaces/IColumn';
-import Ticket from './Ticket';
-import { useDrop } from 'react-dnd';
+import { useDroppable } from '@dnd-kit/core';
 
 interface ColummProps {
-  id: string;
+  column: IColumn;
 }
 
-export default function Column({ id }: ColummProps) {
-  const [column, setColumn] = useState<IColumn>();
+export default function Column({
+  column,
+  children
+}: PropsWithChildren<ColummProps>) {
+  const [columnName, setColumnName] = useState<string>(column.columnName);
 
-  useEffect(() => {
-    axiosInstance
-      .get(`/columns/tickets/${id}`)
-      .then((response: AxiosResponse) => {
-        setColumn(response.data);
-      });
-  }, [id]);
+  const { isOver, setNodeRef } = useDroppable({
+    id: column.id
+  });
 
-  const [, dropRef] = useDrop(() => ({
-    accept: 'BOX',
-    drop: (id) => onTicketDropped(id as {ticketId: string})
-  }));
+  const style = {
+    backgroundColor: isOver ? '#333' : undefined
+  };
 
-  function onTicketDropped({ticketId}: {ticketId: string}) {
-    console.log(`need to move itcket ${ticketId} to column: ${column?.id}`);
+  function updateColumnName(columnName: string) {
+    setColumnName(columnName);
+    axiosInstance.put(`columns/${column.id}`, {
+      columnName
+    });
   }
 
   return (
     <section
-      ref={dropRef}
+      ref={setNodeRef}
+      style={style}
       className="w-full flex flex-col gap-6 bg-neutral-700 rounded p-2"
     >
-      <h1 className="text-2xl">{column?.columnName}</h1>
-      {column?.tickets.map((ticket: ITicket) => (
-        <Ticket key={ticket.id} ticket={ticket} />
-      ))}
+      <input
+        className="text-2xl bg-transparent focus-within:outline-none"
+        value={columnName}
+        onChange={(e) => updateColumnName(e.target.value)}
+      />
+      {children}
     </section>
   );
 }
