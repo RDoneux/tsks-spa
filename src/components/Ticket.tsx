@@ -1,5 +1,6 @@
 import { useDraggable } from '@dnd-kit/core';
 import ITicket from '../interfaces/ITicket';
+import TicketPriorityLabel from './ui/TicketPriorityLabel';
 
 interface TicketProps {
   ticket: ITicket;
@@ -15,7 +16,7 @@ export default function Ticket({ ticket, columnId }: TicketProps) {
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        boxShadow: '0 4px 5px #333'
+        boxShadow: '0 4px 5px #111'
       }
     : undefined;
 
@@ -25,10 +26,12 @@ export default function Ticket({ ticket, columnId }: TicketProps) {
       style={style}
       {...listeners}
       {...attributes}
-      className="bg-neutral-500 rounded p-3"
+      className="bg-neutral-500 rounded p-3 flex flex-col gap-2 shadow-md"
     >
-      <h4>{ticket.ticketName}</h4>
-      <p>{ticket.description}</p>
+      <h4 className="text-xl text-bold">{ticket.ticketName}</h4>
+      <p className="text-sm">{ticket.description}</p>
+      <TicketPriorityLabel priority={ticket.priority} />
+
     </div>
   );
 }

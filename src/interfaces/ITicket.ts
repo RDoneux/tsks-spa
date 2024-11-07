@@ -13,9 +13,9 @@ export default interface ITicket {
 }
 
 export const Priority = {
-  CRITICAL: 'Critical',
-  HIGH: 'High',
-  MEDIUM: 'Medium',
-  LOW: 'Low'
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
 } as const;
 export type Priority = (typeof Priority)[keyof typeof Priority];

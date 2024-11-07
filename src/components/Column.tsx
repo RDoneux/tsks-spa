@@ -32,7 +32,7 @@ export default function Column({
     <section
       ref={setNodeRef}
       style={style}
-      className="w-full flex flex-col gap-6 bg-neutral-700 rounded p-2"
+      className="w-full h-fit flex flex-col gap-6 bg-neutral-700 rounded p-2"
     >
       <input
         className="text-2xl bg-transparent focus-within:outline-none"
