@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import IBoard from '../../interfaces/IBoard';
-import axiosInstance from '../../services/axios-interceptor.service';
+import axiosInstance from '../../services/axios.service';
 import { useParams } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import Column from '../../components/Column';

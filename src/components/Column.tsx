@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from 'react';
-import axiosInstance from '../services/axios-interceptor.service';
+import axiosInstance from '../services/axios.service';
 import IColumn from '../interfaces/IColumn';
 import { useDroppable } from '@dnd-kit/core';
 

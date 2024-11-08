@@ -4,7 +4,7 @@ import { lssave } from '../../../services/local-host.service';
 import {
   AUTH_TOKEN,
   REFRESH_TOKEN
-} from '../../../services/axios-interceptor.service';
+} from '../../../services/axios.service';
 
 export function userNameAndPasswordAreDefined(
   username: string,

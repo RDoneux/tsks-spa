@@ -59,6 +59,9 @@
     "reporters": [
       "default",
       "jest-junit"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/src/services/axios.service.ts"
     ]
   },
   "jest-junit": {

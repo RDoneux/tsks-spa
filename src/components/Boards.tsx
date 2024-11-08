@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import axiosInstance from '../services/axios-interceptor.service';
+import axiosInstance from '../services/axios.service';
 import IBoard from '../interfaces/IBoard';
 import { AxiosResponse } from 'axios';
 import { format } from 'date-fns/format';

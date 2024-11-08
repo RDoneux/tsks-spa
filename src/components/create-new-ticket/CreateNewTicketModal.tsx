@@ -12,7 +12,7 @@ import {
 import Input from '../ui/Input';
 import TextArea from '../ui/TextArea';
 import TicketPrioritySelector from './TicketPrioritySelector';
-import axiosInstance from '../../services/axios-interceptor.service';
+import axiosInstance from '../../services/axios.service';
 import { AxiosError } from 'axios';
 import IColumn from '../../interfaces/IColumn';
 import toast from 'react-hot-toast';

@@ -2,9 +2,17 @@ import axios, { AxiosError } from 'axios';
 import {
   attemptLogin,
   handleUsernameOrPasswordIncorrect,
+  saveTokens,
   userNameAndPasswordAreDefined
 } from '../../../../routes/login/services/Login.service';
 import { toast } from 'react-hot-toast';
+import * as localhostService from '../../../../services/local-host.service'
+import { AUTH_TOKEN, REFRESH_TOKEN } from '../../../../services/axios.service';
+
+jest.mock('../../../../services/local-host.service', () => ({
+  lssave: jest.fn()
+}))
+
 
 describe('login service', () => {
   describe('user name and password are defined', () => {
@@ -60,6 +68,16 @@ describe('login service', () => {
       expect(toast.error).toHaveBeenCalled();
     });
   });
+
+  describe('save tokens', () => {
+    it('should request refresh token & access token are saved to local storage', () => {
+      saveTokens('test-auth-token', 'test-refresh-token');
+
+      expect(localhostService.lssave).toHaveBeenCalledTimes(2);
+      expect(localhostService.lssave).toHaveBeenNthCalledWith(1, REFRESH_TOKEN, 'test-refresh-token')
+      expect(localhostService.lssave).toHaveBeenNthCalledWith(2, AUTH_TOKEN, 'test-auth-token')
+    })
+  })
 
   describe('attempt login', () => {
     it('should make axios request to login endpoint', () => {
