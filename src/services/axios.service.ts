@@ -6,7 +6,7 @@ export const REFRESH_TOKEN = 'refresh-token';
 export const AUTH_TOKEN = 'auth-token';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_BASE_URL
+  baseURL: process.env.VITE_SERVER_BASE_URL
 });
 
 axiosInstance.interceptors.request.use(
@@ -69,7 +69,7 @@ async function refreshAuthToken(): Promise<{ refresh: string; auth: string }> {
     return { refresh: '', auth: '' };
   }
   const response = await axios.post(
-    `${import.meta.env.VITE_SERVER_BASE_URL}/auth/refresh`,
+    `${process.env.VITE_SERVER_BASE_URL}/auth/refresh`,
     { refreshToken: lsget(REFRESH_TOKEN) }
   );
   const { refresh_token, access_token } = response.data;

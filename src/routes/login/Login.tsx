@@ -1,4 +1,3 @@
-import styles from './Login.module.css';
 import { MouseEvent, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -91,11 +90,7 @@ export default function Login() {
           </span>
         </label>
 
-        <button
-          type="submit"
-          className={`${styles['submit-button']} ${styles['disabled']}`}
-          onClick={submit}
-        >
+        <button type="submit" className="funky-button" onClick={submit}>
           <span className="block rounded-sm text-md font-bold">Login</span>
         </button>
 

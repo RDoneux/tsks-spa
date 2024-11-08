@@ -1,3 +1,5 @@
+/* FUNKY BUTTON */
+
 /* LEFT */
 @property --left-colour-red {
   syntax: '<number>';
@@ -55,7 +57,7 @@
   inherits: false;
 }
 
-.submit-button {
+.funky-button {
   display: flex;
   justify-content: center;
   align-items: center;

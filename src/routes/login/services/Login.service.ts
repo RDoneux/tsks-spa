@@ -1,10 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import toast from 'react-hot-toast';
 import { lssave } from '../../../services/local-host.service';
-import {
-  AUTH_TOKEN,
-  REFRESH_TOKEN
-} from '../../../services/axios-interceptor.service';
+import { AUTH_TOKEN, REFRESH_TOKEN } from '../../../services/axios.service';
 
 export function userNameAndPasswordAreDefined(
   username: string,
